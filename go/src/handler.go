@@ -95,3 +95,19 @@ func updateUser(c *gin.Context) {
 	db.Save(&u)
 	c.JSON(http.StatusOK, u)
 }
+
+func deleteUser(c *gin.Context) {
+	db, err := getDB()
+	if err != nil {
+		log.Printf("Error at getDB()\n %v", err)
+	}
+	defer db.Close()
+
+	var u user
+	if err := db.First(&u, c.Param("id")).Error; err != nil {
+		c.JSON(http.StatusConflict, gin.H{"error": err.Error()})
+		return
+	}
+	db.Delete(&u)
+	c.String(204, "")
+}
