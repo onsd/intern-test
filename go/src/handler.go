@@ -36,3 +36,18 @@ func getUsers(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, users)
 }
+
+func getUserByID(c *gin.Context) {
+	db, err := getDB()
+	if err != nil {
+		log.Printf("Error at getDB()\n %v", err)
+	}
+	defer db.Close()
+
+	var user user
+	if err := db.First(&user, c.Param("id")).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, user)
+}

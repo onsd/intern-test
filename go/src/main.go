@@ -9,8 +9,9 @@ import (
 func main() {
 	r := gin.New()
 
-	r.GET("/", greeting)      // æ¨æ¶
-	r.GET("/users", getUsers) // user ã®ä¸è¦§ãè¡¨ç¤º
+	r.GET("/", greeting)             // 挨拶
+	r.GET("/users", getUsers)        // user の一覧を表示
+	r.GET("/users/:id", getUserByID) //指定した id の user を表示
 
 	r.Run(":" + os.Getenv("PORT"))
 }
