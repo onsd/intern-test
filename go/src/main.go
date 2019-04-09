@@ -13,6 +13,7 @@ func main() {
 	r.GET("/users", getUsers)        // user の一覧を表示
 	r.GET("/users/:id", getUserByID) //指定した id の user を表示
 	r.POST("/users", addNewUser)     //user を追加
+	r.PUT("/users/:id", updateUser)  //指定した id の user を更新
 
 	r.Run(":" + os.Getenv("PORT"))
 }

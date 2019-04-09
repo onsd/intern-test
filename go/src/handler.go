@@ -71,3 +71,27 @@ func addNewUser(c *gin.Context) {
 	db.Last(&json)
 	c.JSON(http.StatusOK, json)
 }
+
+func updateUser(c *gin.Context) {
+	db, err := getDB()
+	if err != nil {
+		log.Printf("Error at getDB()\n %v", err)
+	}
+	defer db.Close()
+
+	var u user
+	if err := db.First(&u, c.Param("id")).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+	var json user
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	// Update
+	u.Name = json.Name
+	u.Email = json.Email
+	db.Save(&u)
+	c.JSON(http.StatusOK, u)
+}
