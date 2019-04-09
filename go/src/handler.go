@@ -51,3 +51,23 @@ func getUserByID(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, user)
 }
+
+func addNewUser(c *gin.Context) {
+	db, err := getDB()
+	if err != nil {
+		log.Printf("Error at getDB()\n %v", err)
+	}
+	defer db.Close()
+
+	var json user
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := db.Create(&json).Error; err != nil {
+		c.JSON(http.StatusConflict, gin.H{"error": err.Error()})
+		return
+	}
+	db.Last(&json)
+	c.JSON(http.StatusOK, json)
+}
