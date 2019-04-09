@@ -25,7 +25,7 @@ func greeting(c *gin.Context) {
 func getUsers(c *gin.Context) {
 	db, err := getDB()
 	if err != nil {
-		log.Fatalf("Error at getDB()\n %v", err)
+		log.Printf("Error at getDB()\n %v", err)
 	}
 	defer db.Close()
 
