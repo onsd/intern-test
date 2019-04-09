@@ -1,7 +1,6 @@
 package main
 
 import (
-	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -9,12 +8,9 @@ import (
 
 func main() {
 	r := gin.New()
-	r.GET("/", greeting)
-	r.Run(":" + os.Getenv("PORT"))
-}
 
-func greeting(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Hello World!!",
-	})
+	r.GET("/", greeting)
+	r.GET("/users", getUsers) // user の一覧を表示
+
+	r.Run(":" + os.Getenv("PORT"))
 }
