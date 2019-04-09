@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -10,10 +9,8 @@ import (
 func main() {
 	r := gin.New()
 
-	r.GET("/", greeting)      // 挨拶
-	r.GET("/users", getUsers) // user の一覧を表示
+	r.GET("/", greeting)      // æ¨æ¶
+	r.GET("/users", getUsers) // user ã®ä¸è¦§ãè¡¨ç¤º
 
-	fmt.Println("OS.ENV:")
-	fmt.Println(os.Environ())
 	r.Run(":" + os.Getenv("PORT"))
 }
