@@ -36,11 +36,20 @@ services:
     links:
       - postgres:postgres
     volumes:
-      - ./go/src:/go/src/hot_reload_docker
+      - ./go/src:/go/src/workdir/src
     ports:
       - "8080:8080"
     networks:
       - my-network
+    environment:
+      - HOSTNAME=postgres
+      - USER=postgres
+      - DBNAME=wantedly
+      - PASSWORD=password
+      - CGO_ENABLED=0
+      - GO111MODULE=on
+      - PORT=8080
+      - DB_PORT=5432
 networks:
   my-network:
     external: true
