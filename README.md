@@ -2,6 +2,17 @@
 インターン選考の課題のリポジトリです。
 `Golang`,`postgreSQL`,`docker-compose`を用いてRESTAPIを実装しました。
 
+## 必要条件
++ [Go](https://golang.org/) 1.12.1+ (ローカルで開発するためには、Go modulesを使用できるようにしてください。)
++ [Docker](https://www.docker.com/) 
+## インストール
+
+```sh
+git clone https://github.com/onsd/intern-test
+cd intern-test
+docker-compose up
+```
+
 ## 仕様
 ### エンドポイント
 
