@@ -13,8 +13,6 @@ services:
     volumes:
       - ./postgresql/init:/docker-entrypoint-initdb.d
       - postgres-db:/var/lib/postgresql/data
-    networks:
-      - my-network
   pgweb:
     image: sosedoff/pgweb
     container_name: pgweb
@@ -27,8 +25,6 @@ services:
     restart: always
     depends_on:
       - postgres
-    networks:
-      - my-network
   app:
     build: ./go
     depends_on:
@@ -39,8 +35,6 @@ services:
       - ./go/src:/go/src/workdir/src
     ports:
       - "8080:8080"
-    networks:
-      - my-network
     environment:
       - HOSTNAME=postgres
       - USER=postgres
@@ -50,9 +44,6 @@ services:
       - GO111MODULE=on
       - PORT=8080
       - DB_PORT=5432
-networks:
-  my-network:
-    external: true
 volumes:
   postgres-db:
     driver: local
