@@ -245,7 +245,11 @@ volumes:
   postgres-db:
     driver: local
 ```
+もしくは、`develop/local`ブランチをチェックアウトすることで上記の`docker-compose.yml`に切り替えることができます。
+
 そのあと、`docker-compose up`してください。
+
+
 
 ###  環境変数を設定する
 
@@ -267,6 +271,4 @@ set -x HOSTNAME localhost
 このプロダクトは[Go modules](https://github.com/golang/go/wiki/Modules)を利用しているため`go build`でビルドを行うことができます。
 
 有効にしていない場合、環境変数に`GO111MODULES=on`を設定してください。
-
-
 
